@@ -11,9 +11,9 @@ router.get("/:pid", placesControllers.getPlaceById);
 router.post(
   "/",
   [
-    check("title").not().isEmpty(),
-    check("description").isLength({ min: 5 }),
-    check("address").not().isEmpty,
+    check("title").notEmpty(),
+    check("description").notEmpty().isLength({ min: 5 }),
+    check("address").notEmpty(),
   ],
   placesControllers.createPlace
 );

@@ -4,7 +4,7 @@ const Place = require("../models/place");
 const User = require("../models/user");
 const HttpError = require("../models/http-error");
 const getCoordsForAddress = require("../utils/location");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
@@ -74,7 +74,7 @@ const createPlace = async (req, res, next) => {
     creator,
   });
 
-  let user;
+  let user = null;
 
   try {
     user = await User.findById(creator);
@@ -94,7 +94,7 @@ const createPlace = async (req, res, next) => {
     */
     const session = await mongoose.startSession();
     session.startTransaction();
-    await createPlace.save({ session });
+    await createdPlace.save({ session });
     user.places.push(createdPlace);
     await user.save({ session });
     await session.commitTransaction();

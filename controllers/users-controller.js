@@ -1,4 +1,3 @@
-
 const User = require("../models/user");
 const HttpError = require("../models/http-error");
 const { validationResult } = require("express-validator");
@@ -26,7 +25,7 @@ const signup = async (req, res, next) => {
     );
   }
 
-  const { name, email, password, places } = req.body;
+  const { name, email, password } = req.body;
 
   let existingUser;
 
@@ -47,7 +46,7 @@ const signup = async (req, res, next) => {
     email,
     image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
     password,
-    places,
+    places: [],
   });
 
   try {

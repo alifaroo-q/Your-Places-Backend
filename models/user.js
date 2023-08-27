@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, default: mongoose } = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = new Schema({
@@ -20,10 +20,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  places: {
-    type: String,
-    required: true,
-  },
+  places: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Place",
+      required: true,
+    },
+  ],
 });
 
 userSchema.plugin(uniqueValidator);
